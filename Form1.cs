@@ -10,10 +10,8 @@ public partial class Form1 : Form
         InitializeComponent();
 
         string version =
-            Assembly
-                .GetExecutingAssembly()
-                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
-                ?.InformationalVersion ?? "Unknown";
+            FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion
+            ?? "Unknown";
 
         Text = $"My App - Version {version}";
     }

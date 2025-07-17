@@ -15,6 +15,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set version variable
+        id: set_version
+        run: echo "VERSION=${BASE_VERSION}.${{ github.run_number }}" >> $GITHUB_ENV
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
@@ -26,10 +30,10 @@ jobs:
           -r win-x64
           --self-contained true
           -o ./publish
-          /p:Version=${{ env.BASE_VERSION }}.${{ github.run_number }}
-          /p:FileVersion=${{ env.BASE_VERSION }}.${{ github.run_number }}
-          /p:AssemblyVersion=${{ env.BASE_VERSION }}.${{ github.run_number }}
-          /p:InformationalVersion=${{ env.BASE_VERSION }}.${{ github.run_number }}
+          /p:Version=${{ env.VERSION }}
+          /p:FileVersion=${{ env.VERSION }}
+          /p:AssemblyVersion=${{ env.VERSION }}
+          /p:InformationalVersion=${{ env.VERSION }}
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
