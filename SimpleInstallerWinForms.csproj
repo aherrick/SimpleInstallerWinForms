@@ -10,12 +10,7 @@
 
 
 		<Version>1.0.0.0</Version>
-		<!-- Default four-part version -->
-		<FileVersion>$(Version)</FileVersion>
-		<InformationalVersion>$(Version)</InformationalVersion>
-		<AssemblyVersion>$(Version)</AssemblyVersion>
 		<Deterministic>true</Deterministic>
-		<IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
 	</PropertyGroup>
 
 </Project>
