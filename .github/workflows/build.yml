@@ -31,9 +31,6 @@ jobs:
           --self-contained true
           -o ./publish
           /p:Version=${{ env.VERSION }}
-          /p:FileVersion=${{ env.VERSION }}
-          /p:AssemblyVersion=${{ env.VERSION }}
-          /p:InformationalVersion=${{ env.VERSION }}
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
