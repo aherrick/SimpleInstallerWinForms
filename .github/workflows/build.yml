@@ -38,3 +38,20 @@ jobs:
         with:
           name: WinFormsApp
           path: ./publish
+
+      - name: Install Inno Setup
+        run: winget install -e --id JRSoftware.InnoSetup
+
+      - name: Update installer version
+        run: |
+          (Get-Content installer.iss) -replace '^(AppVersion\s*=).*', "`$1${{ env.VERSION }}" | Set-Content installer.iss
+        shell: pwsh
+
+      - name: Build Inno Setup installer
+        run: '"C:\Program Files (x86)\Inno Setup 6\ISCC.exe" installer.iss'
+
+      - name: Upload Installer Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: WinFormsInstaller
+          path: installer.exe
