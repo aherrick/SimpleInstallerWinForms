@@ -1,6 +1,7 @@
 [Setup]
 AppName=SimpleInstallerWinForms
-AppVersion=1.0.0
+AppVersion=1.0.0.0
+VersionInfoVersion=1.0.0.0
 DefaultDirName={autopf}\SimpleInstallerWinForms
 OutputBaseFilename=SimpleInstallerWinForms
 OutputDir=Output
