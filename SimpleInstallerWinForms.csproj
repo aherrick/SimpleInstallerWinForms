@@ -1,8 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup Condition="'$(BUILD_NUMBER)' == ''">
-		<BUILD_NUMBER>0</BUILD_NUMBER>
-	</PropertyGroup>
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
@@ -10,6 +7,8 @@
 		<Nullable>enable</Nullable>
 		<UseWindowsForms>true</UseWindowsForms>
 		<ImplicitUsings>enable</ImplicitUsings>
+
+		<BUILD_NUMBER>0</BUILD_NUMBER>
 		<VersionPrefix>1.0</VersionPrefix>
 		<Version>$(VersionPrefix).$(BUILD_NUMBER)</Version>
 	</PropertyGroup>
