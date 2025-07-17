@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup Condition="'$(BUILD_NUMBER)' == ''">
+		<BUILD_NUMBER>1</BUILD_NUMBER>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net9.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<Version>1.0.$(BUILD_NUMBER)</Version>
+
+	</PropertyGroup>
+
+
+</Project>
