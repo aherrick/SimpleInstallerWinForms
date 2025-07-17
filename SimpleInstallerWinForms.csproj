@@ -7,6 +7,12 @@
 		<Nullable>enable</Nullable>
 		<UseWindowsForms>true</UseWindowsForms>
 		<ImplicitUsings>enable</ImplicitUsings>
+
+		<Version>1.0.0</Version>
+		<!-- Default version if not overridden -->
+		<FileVersion>$(Version)</FileVersion>
+		<InformationalVersion>$(Version)</InformationalVersion>
+		<AssemblyVersion>$(Version).0</AssemblyVersion>
 	</PropertyGroup>
 
 </Project>
