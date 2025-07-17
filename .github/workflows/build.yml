@@ -25,16 +25,17 @@ jobs:
           dotnet-version: '9.x'
 
       - name: Publish self-contained WinForms app
-        run: |
-          dotnet publish SimpleInstallerWinForms/SimpleInstallerWinForms.csproj \
-            -c Release \
-            -r win-x64 \
-            --self-contained true \
-            -o ./publish \
-            /p:Version=${{ env.VERSION }} \
-            /p:FileVersion=${{ env.VERSION }} \
-            /p:AssemblyVersion=${{ env.VERSION }} \
-            /p:InformationalVersion=${{ env.VERSION }}
+        run: >
+          dotnet publish SimpleInstallerWinForms/SimpleInstallerWinForms.csproj
+          -c Release
+          -r win-x64
+          --self-contained true
+          -o ./publish
+          /p:Version=${{ env.VERSION }}
+          /p:FileVersion=${{ env.VERSION }}
+          /p:AssemblyVersion=${{ env.VERSION }}
+          /p:InformationalVersion=${{ env.VERSION }}
+
 
 
       - name: Upload Artifact
