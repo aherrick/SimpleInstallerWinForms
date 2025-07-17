@@ -9,11 +9,9 @@ public partial class Form1 : Form
         InitializeComponent();
 
         var version =
-            Assembly
-                .GetExecutingAssembly()
-                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
-                ?.InformationalVersion ?? "Unknown";
+            System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString()
+            ?? "Unknown";
 
-        Text = $"SimpleInstallerWinForms - Version {version}";
+        Text = $"My App - Version {version}";
     }
 }
