@@ -17,8 +17,13 @@ jobs:
         with:
           dotnet-version: '9.x'
 
-      - name: Publish with version
-        run: dotnet publish -c Release -o ./publish /p:Version=1.0.${{ github.run_number }}
+      - name: Publish self-contained WinForms app
+        run: >
+          dotnet publish -c Release
+          -r win-x64
+          --self-contained true
+          -o ./publish
+          /p:Version=1.0.${{ github.run_number }}
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
