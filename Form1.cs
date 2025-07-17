@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Reflection;
 
 namespace SimpleInstallerWinForms;
@@ -8,8 +9,8 @@ public partial class Form1 : Form
     {
         InitializeComponent();
 
-        var version =
-            System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString()
+        string version =
+            FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion
             ?? "Unknown";
 
         Text = $"My App - Version {version}";
