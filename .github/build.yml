@@ -1,0 +1,33 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate BUILD_NUMBER fallback
+        run: echo "BUILD_NUMBER=${{ github.run_number }}" >> $GITHUB_ENV
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.x'
+
+      - name: Build
+        run: dotnet build -c Release /p:BUILD_NUMBER=${{ env.BUILD_NUMBER }}
+
+      - name: Publish
+        run: dotnet publish -c Release -o ./publish /p:BUILD_NUMBER=${{ env.BUILD_NUMBER }}
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: WinFormsApp
+          path: ./publish
