@@ -42,7 +42,8 @@ jobs:
       - name: Set version in installer.iss
         shell: pwsh
         run: |
-          (Get-Content installer.iss) -replace '^(AppVersion\s*=).*', "$1${{ env.VERSION }}" | Set-Content installer.iss
+          $version = "${{ env.VERSION }}"
+          (Get-Content installer.iss) -replace '^AppVersion\s*=.*', "AppVersion=$version" | Set-Content installer.iss
 
       - name: Build Inno Setup installer
         uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
