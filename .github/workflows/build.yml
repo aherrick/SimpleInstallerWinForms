@@ -1,4 +1,4 @@
-name: Build
+name: Build and Release
 
 on:
   push:
@@ -33,12 +33,6 @@ jobs:
           -o ./publish
           /p:Version=${{ env.VERSION }}
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: WinFormsApp
-          path: ./publish
-
       - name: Set version in installer.iss
         shell: pwsh
         run: |
@@ -50,9 +44,23 @@ jobs:
         with:
           path: installer.iss
 
-      - name: Upload Installer Artifact
-        uses: actions/upload-artifact@v4
+      - name: Create GitHub Release
+        id: create-release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: WinFormsInstaller-${{ env.VERSION }}
-          path: Output/SimpleInstallerWinForms.exe
+          tag_name: v${{ env.VERSION }}
+          release_name: Release v${{ env.VERSION }}
+          draft: false
+          prerelease: false
 
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: Output/SimpleInstallerWinForms-${{ env.VERSION }}.exe
+          asset_name: SimpleInstallerWinForms-${{ env.VERSION }}.exe
+          asset_content_type: application/octet-stream
