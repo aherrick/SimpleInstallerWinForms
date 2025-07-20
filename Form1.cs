@@ -20,15 +20,20 @@ public partial class Form1 : Form
     protected override void OnFormClosed(FormClosedEventArgs e)
     {
         base.OnFormClosed(e);
+
+        // Only run installer if there is one to run
         if (!string.IsNullOrEmpty(downloadedInstallerPath) && File.Exists(downloadedInstallerPath))
         {
             try
             {
+                // Run via cmd so this process can exit cleanly
                 Process.Start(
                     new ProcessStartInfo
                     {
-                        FileName = downloadedInstallerPath,
-                        UseShellExecute = true,
+                        FileName = "cmd.exe",
+                        Arguments = $"/C start \"\" \"{downloadedInstallerPath}\"",
+                        CreateNoWindow = true,
+                        UseShellExecute = false,
                     }
                 );
             }
