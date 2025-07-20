@@ -1,18 +1,15 @@
 ﻿using System.Diagnostics;
 
-int processId = int.Parse(args[0]);
+int pid = int.Parse(args[0]);
 string installerPath = args[1];
 
-// Wait for the main app to fully exit
+// Wait for the main process to fully exit
 try
 {
-    var proc = Process.GetProcessById(processId);
-    proc.WaitForExit();
+    Process.GetProcessById(pid).WaitForExit();
 }
-catch
-{ /* Already exited */
-}
+catch { }
 
-Thread.Sleep(300); // Extra safety
+Thread.Sleep(200); // Extra safety
 
 Process.Start(new ProcessStartInfo { FileName = installerPath, UseShellExecute = true });

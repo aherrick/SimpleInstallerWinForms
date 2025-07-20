@@ -25,25 +25,33 @@ public partial class Form1 : Form
         {
             try
             {
-                // Path to UpdateHelper.exe (should be next to your app or in temp)
                 string helperPath = Path.Combine(
                     AppDomain.CurrentDomain.BaseDirectory,
                     "UpdateHelper.exe"
                 );
-                int myPid = Environment.ProcessId;
+                if (!File.Exists(helperPath))
+                {
+                    MessageBox.Show($"UpdateHelper.exe not found at {helperPath}", "Update Error");
+                    return;
+                }
 
-                Process.Start(
-                    new ProcessStartInfo
-                    {
-                        FileName = helperPath,
-                        Arguments = $"{myPid} \"{downloadedInstallerPath}\"",
-                        UseShellExecute = true,
-                    }
-                );
+                int pid = Environment.ProcessId;
+                string quotedInstaller = downloadedInstallerPath.Replace("\"", "\"\"");
+                string args = $"{pid} \"{quotedInstaller}\"";
+
+                var psi = new ProcessStartInfo
+                {
+                    FileName = helperPath,
+                    Arguments = args,
+                    UseShellExecute = true,
+                    Verb = "runas", // This triggers UAC elevation if needed
+                };
+
+                Process.Start(psi);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to run installer: {ex.Message}");
+                MessageBox.Show($"Failed to run UpdateHelper:\n{ex.Message}", "Update Error");
             }
         }
     }
