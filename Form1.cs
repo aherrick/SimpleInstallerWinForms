@@ -26,14 +26,13 @@ public partial class Form1 : Form
         {
             try
             {
-                // Run via cmd so this process can exit cleanly
                 Process.Start(
                     new ProcessStartInfo
                     {
                         FileName = "cmd.exe",
                         Arguments = $"/C start \"\" \"{downloadedInstallerPath}\"",
                         CreateNoWindow = true,
-                        UseShellExecute = false,
+                        UseShellExecute = true, // <--- change this to true
                     }
                 );
             }
