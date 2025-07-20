@@ -3,13 +3,32 @@
 int pid = int.Parse(args[0]);
 string installerPath = args[1];
 
-// Wait for the main process to fully exit
 try
 {
-    Process.GetProcessById(pid).WaitForExit();
+    var proc = Process.GetProcessById(pid);
+    proc.WaitForExit();
 }
-catch { }
+catch
+{
+    // Already exited
+}
 
-Thread.Sleep(200); // Extra safety
+// Wait longer to guarantee all file locks are gone
+Thread.Sleep(1000); // 1 second
 
-Process.Start(new ProcessStartInfo { FileName = installerPath, UseShellExecute = true });
+try
+{
+    Process.Start(
+        new ProcessStartInfo
+        {
+            FileName = installerPath,
+            UseShellExecute = true,
+            Verb = "runas",
+        }
+    );
+}
+catch (Exception ex)
+{
+    // Optionally, log or display error
+    Console.WriteLine("Failed to start installer: " + ex.Message);
+}

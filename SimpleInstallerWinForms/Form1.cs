@@ -36,15 +36,13 @@ public partial class Form1 : Form
                 }
 
                 int pid = Environment.ProcessId;
-                string quotedInstaller = downloadedInstallerPath.Replace("\"", "\"\"");
-                string args = $"{pid} \"{quotedInstaller}\"";
+                string args = $"{pid} \"{downloadedInstallerPath}\"";
 
                 var psi = new ProcessStartInfo
                 {
                     FileName = helperPath,
                     Arguments = args,
                     UseShellExecute = true,
-                    Verb = "runas", // This triggers UAC elevation if needed
                 };
 
                 Process.Start(psi);
@@ -54,6 +52,9 @@ public partial class Form1 : Form
                 MessageBox.Show($"Failed to run UpdateHelper:\n{ex.Message}", "Update Error");
             }
         }
+
+        // Force the process to terminate immediately
+        Environment.Exit(0);
     }
 
     private async void button1_Click(object sender, EventArgs e)
