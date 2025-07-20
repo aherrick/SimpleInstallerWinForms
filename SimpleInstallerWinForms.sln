@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36301.6 d17.14
+VisualStudioVersion = 17.14.36301.6
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleInstallerWinForms", "SimpleInstallerWinForms.csproj", "{183C0A99-325B-4642-9CA0-709BFD0080BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleInstallerWinForms", "SimpleInstallerWinForms\SimpleInstallerWinForms.csproj", "{183C0A99-325B-4642-9CA0-709BFD0080BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateHelper", "UpdateHelper\UpdateHelper.csproj", "{9FD1F6D0-D963-475A-A472-6C64F4568867}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{183C0A99-325B-4642-9CA0-709BFD0080BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{183C0A99-325B-4642-9CA0-709BFD0080BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{183C0A99-325B-4642-9CA0-709BFD0080BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FD1F6D0-D963-475A-A472-6C64F4568867}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FD1F6D0-D963-475A-A472-6C64F4568867}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FD1F6D0-D963-475A-A472-6C64F4568867}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FD1F6D0-D963-475A-A472-6C64F4568867}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

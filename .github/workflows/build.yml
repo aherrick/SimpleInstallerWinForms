@@ -27,7 +27,7 @@ jobs:
 
       - name: Publish self-contained WinForms app
         run: >
-          dotnet publish SimpleInstallerWinForms.csproj
+          dotnet publish SimpleInstallerWinForms\SimpleInstallerWinForms.csproj
           -c Release
           -r win-x64
           --self-contained true
