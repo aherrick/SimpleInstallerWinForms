@@ -10,14 +10,12 @@ public partial class Form1 : Form
     {
         InitializeComponent();
 
-        string version =
-            FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion
-            ?? "Unknown";
+        var currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-        Text = $"My App - Version {version}";
+        Text = $"{nameof(SimpleInstallerWinForms)} - Version {currentVersion}";
     }
 
-    private string? downloadedInstallerPath = null;
+    private string downloadedInstallerPath = null;
 
     protected override void OnFormClosed(FormClosedEventArgs e)
     {
@@ -43,8 +41,7 @@ public partial class Form1 : Form
 
     private async void button1_Click(object sender, EventArgs e)
     {
-        string currentVersion =
-            Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "0.0.0.0";
+        var currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
         var client = new HttpClient();
         client.DefaultRequestHeaders.UserAgent.ParseAdd("SimpleInstallerWinForms");
@@ -54,8 +51,8 @@ public partial class Form1 : Form
         );
         var doc = JsonDocument.Parse(json);
         var root = doc.RootElement;
-        string tag = root.GetProperty("tag_name").GetString();
-        string latestVersion = tag.StartsWith('v') ? tag[1..] : tag;
+        var tag = root.GetProperty("tag_name").GetString();
+        var latestVersion = tag.StartsWith('v') ? tag[1..] : tag;
 
         if (new Version(latestVersion) > new Version(currentVersion))
         {
