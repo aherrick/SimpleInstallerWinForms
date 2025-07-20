@@ -68,7 +68,7 @@ public partial class Form1 : Form
                 ) == DialogResult.Yes
             )
             {
-                string tempPath = Path.Combine(Path.GetTempPath(), Path.GetFileName(assetUrl));
+                var tempPath = Path.Combine(Path.GetTempPath(), Path.GetFileName(assetUrl));
                 var resp = await client.GetAsync(assetUrl);
                 resp.EnsureSuccessStatusCode();
                 var fs = new FileStream(tempPath, FileMode.Create, FileAccess.Write);
