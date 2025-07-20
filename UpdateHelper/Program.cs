@@ -1,5 +1,11 @@
 ﻿using System.Diagnostics;
 
+if (args.Length < 2)
+{
+    Console.WriteLine("Error: Missing arguments. Expected: <pid> <installerPath>");
+    return;
+}
+
 if (!int.TryParse(args[0], out int pid))
 {
     Console.WriteLine("Error: Invalid PID format.");
@@ -14,15 +20,12 @@ try
     try
     {
         var proc = Process.GetProcessById(pid);
-        proc.WaitForExit(5000); // Wait up to 5 seconds
+        proc.WaitForExit(1000); // Wait up to 1 second
     }
     catch (ArgumentException)
     {
         // Process already exited
     }
-
-    // Additional delay to ensure file locks are released
-    Thread.Sleep(2000); // 2 seconds for safety
 
     if (!File.Exists(installerPath))
     {
