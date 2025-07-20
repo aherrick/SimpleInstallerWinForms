@@ -17,9 +17,9 @@ public partial class Form1 : Form
 
     private string downloadedInstallerPath = null;
 
-    protected override void OnFormClosed(FormClosedEventArgs e)
+    protected override async void OnFormClosing(FormClosingEventArgs e)
     {
-        base.OnFormClosed(e);
+        base.OnFormClosing(e);
 
         if (!string.IsNullOrEmpty(downloadedInstallerPath) && File.Exists(downloadedInstallerPath))
         {
@@ -43,18 +43,26 @@ public partial class Form1 : Form
                     FileName = helperPath,
                     Arguments = args,
                     UseShellExecute = true,
+                    CreateNoWindow = true, // Run UpdateHelper silently
                 };
 
+                // Start UpdateHelper and give it time to initialize
                 Process.Start(psi);
+
+                // Small delay to ensure UpdateHelper is ready
+                await Task.Delay(500);
+
+                // Explicitly dispose form resources
+                Dispose();
+
+                // Exit immediately to release all file locks
+                Environment.Exit(0);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Failed to run UpdateHelper:\n{ex.Message}", "Update Error");
             }
         }
-
-        // Force the process to terminate immediately
-        Environment.Exit(0);
     }
 
     private async void button1_Click(object sender, EventArgs e)

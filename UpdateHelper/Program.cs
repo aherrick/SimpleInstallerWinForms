@@ -1,34 +1,46 @@
 ﻿using System.Diagnostics;
 
-int pid = int.Parse(args[0]);
+if (!int.TryParse(args[0], out int pid))
+{
+    Console.WriteLine("Error: Invalid PID format.");
+    return;
+}
+
 string installerPath = args[1];
 
 try
 {
-    var proc = Process.GetProcessById(pid);
-    proc.WaitForExit();
-}
-catch
-{
-    // Already exited
-}
+    // Wait for the main application to exit
+    try
+    {
+        var proc = Process.GetProcessById(pid);
+        proc.WaitForExit(5000); // Wait up to 5 seconds
+    }
+    catch (ArgumentException)
+    {
+        // Process already exited
+    }
 
-// Wait longer to guarantee all file locks are gone
-Thread.Sleep(1000); // 1 second
+    // Additional delay to ensure file locks are released
+    Thread.Sleep(2000); // 2 seconds for safety
 
-try
-{
-    Process.Start(
-        new ProcessStartInfo
-        {
-            FileName = installerPath,
-            UseShellExecute = true,
-            Verb = "runas",
-        }
-    );
+    if (!File.Exists(installerPath))
+    {
+        Console.WriteLine($"Error: Installer not found at {installerPath}");
+        return;
+    }
+
+    ProcessStartInfo psi = new ProcessStartInfo
+    {
+        FileName = installerPath,
+        UseShellExecute = true,
+        Verb = "runas", // Request elevation
+        CreateNoWindow = true, // Run silently
+    };
+
+    Process.Start(psi);
 }
 catch (Exception ex)
 {
-    // Optionally, log or display error
-    Console.WriteLine("Failed to start installer: " + ex.Message);
+    Console.WriteLine($"Failed to start installer: {ex.Message}");
 }
