@@ -11,3 +11,6 @@ Source: "publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs creat
 
 [Icons]
 Name: "{autoprograms}\{#SetupSetting("AppName")}"; Filename: "{app}\{#SetupSetting("AppName")}.exe"
+Name: "{autodesktop}\{#SetupSetting("AppName")}"; Filename: "{app}\{#SetupSetting("AppName")}.exe"; Tasks: desktopicon
+[Tasks]
+Name: "desktopicon"; Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"
