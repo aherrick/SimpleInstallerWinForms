@@ -25,7 +25,7 @@ jobs:
         with:
           dotnet-version: '9.x'
 
-      - name: Publish self-contained WinForms app
+      - name: Publish SimpleInstallerWinForms
         run: >
           dotnet publish SimpleInstallerWinForms\SimpleInstallerWinForms.csproj
           -c Release
@@ -33,6 +33,18 @@ jobs:
           --self-contained true
           -o ./publish
           /p:Version=${{ env.VERSION }}
+
+
+      - name: Publish UpdateHelper
+        run: >
+          dotnet publish UpdateHelper/UpdateHelper.csproj
+          -c Release
+          -r win-x64
+          --self-contained true
+          -o ./publish
+          /p:Version=${{ env.VERSION }}
+          /p:PublishSingleFile=true
+          /p:TrimUnusedDependencies=true
 
       - name: Set version in installer.iss
         shell: pwsh
