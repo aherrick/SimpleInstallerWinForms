@@ -34,17 +34,16 @@ jobs:
           -o ./publish
           /p:Version=${{ env.VERSION }}
 
-
       - name: Publish UpdateHelper
-        run: >
+        run: |
           dotnet publish UpdateHelper/UpdateHelper.csproj
-          -c Release
-          -r win-x64
-          --self-contained true
-          -o ./publish
-          /p:Version=${{ env.VERSION }}
-          /p:PublishSingleFile=true
-          /p:TrimUnusedDependencies=true
+            -c Release
+            -r win-x64
+            --self-contained true
+            -o ./publish
+            /p:Version=${{ env.VERSION }}
+            /p:PublishSingleFile=true
+            /p:PublishTrimmed=true
 
       - name: Set version in installer.iss
         shell: pwsh

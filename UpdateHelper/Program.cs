@@ -12,7 +12,7 @@ if (!int.TryParse(args[0], out int pid))
     return;
 }
 
-string installerPath = args[1];
+var installerPath = args[1];
 
 try
 {
@@ -33,7 +33,7 @@ try
         return;
     }
 
-    ProcessStartInfo psi = new ProcessStartInfo
+    ProcessStartInfo psi = new()
     {
         FileName = installerPath,
         UseShellExecute = true,
