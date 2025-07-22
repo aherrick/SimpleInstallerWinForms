@@ -7,7 +7,7 @@ var installerPath = args[1];
 try
 {
     var proc = Process.GetProcessById(pid);
-    proc.WaitForExit(1000); // Wait up to 1 second
+    proc.WaitForExit(); // Wait up to 1 second
 }
 catch (ArgumentException)
 {
