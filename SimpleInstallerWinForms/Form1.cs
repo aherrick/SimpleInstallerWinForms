@@ -70,7 +70,7 @@ public partial class Form1 : Form
 
             if (
                 MessageBox.Show(
-                    $"Update available: {latestVersion}. Download and install?",
+                    $"Update available: {latestVersion}. Download?",
                     "Update",
                     MessageBoxButtons.YesNo
                 ) == DialogResult.Yes
