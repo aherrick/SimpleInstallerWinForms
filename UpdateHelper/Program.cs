@@ -7,18 +7,25 @@ var installerPath = args[1];
 try
 {
     var proc = Process.GetProcessById(pid);
-    proc.WaitForExit(); // Wait up to 1 second
+    if (!proc.HasExited)
+        proc.WaitForExit(10000);
 }
 catch (ArgumentException)
 {
     // Process already exited
 }
 
-ProcessStartInfo psi = new()
+try
 {
-    FileName = installerPath,
-    UseShellExecute = true,
-    CreateNoWindow = true, // Run silently
-};
-
-Process.Start(psi);
+    var psi = new ProcessStartInfo
+    {
+        FileName = installerPath,
+        Arguments = "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART",
+        UseShellExecute = true,
+        CreateNoWindow = true,
+    };
+    Process.Start(psi);
+}
+catch
+{ /* silent fail */
+}
