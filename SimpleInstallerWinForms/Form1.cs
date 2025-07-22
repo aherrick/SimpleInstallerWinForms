@@ -25,18 +25,28 @@ public partial class Form1 : Form
         {
             try
             {
-                Process.Start(
-                    new ProcessStartInfo
-                    {
-                        FileName = Path.Combine(
-                            AppDomain.CurrentDomain.BaseDirectory,
-                            "UpdateHelper.exe"
-                        ),
-                        Arguments = $"\"{Environment.ProcessId}\" \"{downloadedInstallerPath}\"",
-                        UseShellExecute = true,
-                        CreateNoWindow = true,
-                    }
-                );
+                //Process.Start(
+                //    new ProcessStartInfo
+                //    {
+                //        FileName = Path.Combine(
+                //            AppDomain.CurrentDomain.BaseDirectory,
+                //            "UpdateHelper.exe"
+                //        ),
+                //        Arguments = $"\"{Environment.ProcessId}\" \"{downloadedInstallerPath}\"",
+                //        UseShellExecute = true,
+                //        CreateNoWindow = true,
+                //    }
+                //);
+
+                // without update helper, just run the installer directly
+                ProcessStartInfo psi = new()
+                {
+                    FileName = downloadedInstallerPath,
+                    Arguments = "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART",
+                    UseShellExecute = true,
+                    CreateNoWindow = true,
+                };
+                Process.Start(psi);
             }
             catch (Exception ex)
             {
@@ -44,9 +54,9 @@ public partial class Form1 : Form
             }
         }
 
-        // Explicitly dispose and exit immediately
-        Dispose();
-        Environment.Exit(0);
+        //// Explicitly dispose and exit immediately
+        //Dispose();
+        //Environment.Exit(0);
     }
 
     private async void button1_Click(object sender, EventArgs e)
