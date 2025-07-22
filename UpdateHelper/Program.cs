@@ -18,7 +18,6 @@ ProcessStartInfo psi = new()
 {
     FileName = installerPath,
     UseShellExecute = true,
-    Verb = "runas", // Request elevation
     CreateNoWindow = true, // Run silently
 };
 
