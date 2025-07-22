@@ -5,6 +5,7 @@ VersionInfoVersion={#SetupSetting("AppVersion")}
 DefaultDirName={userappdata}\Local\Programs\{#SetupSetting("AppName")}
 OutputBaseFilename={#SetupSetting("AppName")}-{#SetupSetting("AppVersion")}
 OutputDir=Output
+PrivilegesRequired=lowest
 
 [Files]
 Source: "publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
