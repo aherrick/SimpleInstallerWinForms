@@ -52,7 +52,7 @@ public partial class Form1 : Form
         var currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
         var client = new HttpClient();
-        client.DefaultRequestHeaders.UserAgent.ParseAdd("SimpleInstallerWinForms");
+        client.DefaultRequestHeaders.UserAgent.ParseAdd(nameof(SimpleInstallerWinForms));
 
         var json = await client.GetStringAsync(
             "https://api.github.com/repos/aherrick/SimpleInstallerWinForms/releases/latest"
