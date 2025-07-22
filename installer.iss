@@ -15,4 +15,4 @@ Name: "{autoprograms}\{#SetupSetting("AppName")}"; Filename: "{app}\{#SetupSetti
 Name: "{autodesktop}\{#SetupSetting("AppName")}"; Filename: "{app}\{#SetupSetting("AppName")}.exe"
 
 [Run]
-Filename: "{app}\{#SetupSetting("AppName")}.exe"; Description: "Launch application"; Flags: nowait postinstall
+Filename: "{app}\{#SetupSetting("AppName")}.exe"; Flags: nowait
