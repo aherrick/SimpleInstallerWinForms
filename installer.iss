@@ -13,3 +13,6 @@ Source: "publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs creat
 [Icons]
 Name: "{autoprograms}\{#SetupSetting("AppName")}"; Filename: "{app}\{#SetupSetting("AppName")}.exe"
 Name: "{autodesktop}\{#SetupSetting("AppName")}"; Filename: "{app}\{#SetupSetting("AppName")}.exe"
+
+[Run]
+Filename: "{app}\{#SetupSetting("AppName")}.exe"; Description: "Launch application"; Flags: nowait postinstall

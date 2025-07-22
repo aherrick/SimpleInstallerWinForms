@@ -25,23 +25,20 @@ public partial class Form1 : Form
         {
             try
             {
-                string helperPath = Path.Combine(
-                    AppDomain.CurrentDomain.BaseDirectory,
-                    "UpdateHelper.exe"
+                Process.Start(
+                    new ProcessStartInfo
+                    {
+                        FileName = Path.Combine(
+                            AppDomain.CurrentDomain.BaseDirectory,
+                            "UpdateHelper.exe"
+                        ),
+                        Arguments = $"\"{Environment.ProcessId}\" \"{downloadedInstallerPath}\"",
+                        UseShellExecute = true,
+                        CreateNoWindow = true,
+                    }
                 );
-                if (File.Exists(helperPath))
-                {
-                    Process.Start(
-                        new ProcessStartInfo
-                        {
-                            FileName = helperPath,
-                            Arguments =
-                                $"\"{Environment.ProcessId}\" \"{downloadedInstallerPath}\"",
-                            UseShellExecute = true,
-                            CreateNoWindow = true,
-                        }
-                    );
-                }
+
+                Environment.Exit(0);
             }
             catch (Exception ex)
             {
