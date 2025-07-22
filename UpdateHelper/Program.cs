@@ -1,49 +1,25 @@
 ﻿using System.Diagnostics;
 
-if (args.Length < 2)
-{
-    Console.WriteLine("Error: Missing arguments. Expected: <pid> <installerPath>");
-    return;
-}
-
-if (!int.TryParse(args[0], out int pid))
-{
-    Console.WriteLine("Error: Invalid PID format.");
-    return;
-}
-
+var pid = int.Parse(args[0]);
 var installerPath = args[1];
 
+// Wait for the main application to exit
 try
 {
-    // Wait for the main application to exit
-    try
-    {
-        var proc = Process.GetProcessById(pid);
-        proc.WaitForExit(1000); // Wait up to 1 second
-    }
-    catch (ArgumentException)
-    {
-        // Process already exited
-    }
-
-    if (!File.Exists(installerPath))
-    {
-        Console.WriteLine($"Error: Installer not found at {installerPath}");
-        return;
-    }
-
-    ProcessStartInfo psi = new()
-    {
-        FileName = installerPath,
-        UseShellExecute = true,
-        Verb = "runas", // Request elevation
-        CreateNoWindow = true, // Run silently
-    };
-
-    Process.Start(psi);
+    var proc = Process.GetProcessById(pid);
+    proc.WaitForExit(1000); // Wait up to 1 second
 }
-catch (Exception ex)
+catch (ArgumentException)
 {
-    Console.WriteLine($"Failed to start installer: {ex.Message}");
+    // Process already exited
 }
+
+ProcessStartInfo psi = new()
+{
+    FileName = installerPath,
+    UseShellExecute = true,
+    Verb = "runas", // Request elevation
+    CreateNoWindow = true, // Run silently
+};
+
+Process.Start(psi);
