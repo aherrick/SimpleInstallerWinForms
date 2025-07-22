@@ -20,7 +20,7 @@ try
     var psi = new ProcessStartInfo
     {
         FileName = installerPath,
-        Arguments = "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART",
+        //  Arguments = "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART",
         UseShellExecute = true,
         CreateNoWindow = true,
     };
