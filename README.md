@@ -1,5 +1,6 @@
-
 # SimpleInstallerWinForms
+
+![dotnet](https://github.com/aherrick/SimpleInstallerWinForms/actions/workflows/build.yml/badge.svg)
 
 SimpleInstallerWinForms is a basic Windows Forms application with an Inno Setup installer.
 

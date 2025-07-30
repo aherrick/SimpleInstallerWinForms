@@ -8,7 +8,7 @@ try
 {
     var proc = Process.GetProcessById(pid);
     if (!proc.HasExited)
-        proc.WaitForExit(10000);
+        proc.WaitForExit(1000);
 }
 catch (ArgumentException)
 {
